@@ -9,8 +9,9 @@
 <body class="bg-gray-100">
 <header class="bg-green-500 text-white p-4 flex justify-between items-center">
     <div class="flex items-center">
-        <img src="/images/logo.png" alt="Stonkspizza Logo" class="h-10 mr-3">
+
         <h1 class="text-xl font-bold">Stonkspizza</h1>
+        <img src="/images/image 4.png" alt="Stonkspizza Logo" class="h-20 mr-3">
     </div>
     <nav>
         <a href="/" class="text-white mr-4">Home</a>

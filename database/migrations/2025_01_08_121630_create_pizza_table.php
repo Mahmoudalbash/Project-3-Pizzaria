@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('pizza', function (Blueprint $table) {
             $table->id();
-            $table->ForeignId('pizza_id')->nulable()->constrained();
             $table->string('name')->nullable();
+            $table->string('image')->nullable();
+            $table->decimal('price', 8, 2)->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('pizza');

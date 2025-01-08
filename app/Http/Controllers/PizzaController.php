@@ -12,6 +12,6 @@ class PizzaController extends Controller
         $pizzas = Pizza::all();
 
 
-        return view('pizzas/menu', compact('pizzas'));
+        return view('pizzas/menu', compact('pizzas')); // Stuur ze naar de view
     }
 }
