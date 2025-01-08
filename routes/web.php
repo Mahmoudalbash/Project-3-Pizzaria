@@ -21,3 +21,4 @@ require __DIR__.'/auth.php';
 
 Route::get('/pizzas/menu')->name('pizzas.menu');
 
+Route::get('pizzas/menu', [PizzaController::class, 'index']);
