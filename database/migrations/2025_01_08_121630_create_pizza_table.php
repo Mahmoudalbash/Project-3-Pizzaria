@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pizza', function (Blueprint $table) {
             $table->id();
             $table->ForeignId('pizza_id')->nulable()->constrained();
-            $table->string('naam')->nullable();
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }

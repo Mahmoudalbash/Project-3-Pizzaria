@@ -12,6 +12,16 @@ class PizzaTableSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('pizza')->insert
+        ([
+                'name' => 'Margherita',
+            ],
+            [
+                'name' => 'Capricciosa',
+            ],
+            [
+                'name' => 'Veggie',
+            ],
+        );
     }
 }

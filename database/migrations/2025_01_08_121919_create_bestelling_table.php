@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('bestelling', function (Blueprint $table) {
             $table->id();
             $table->ForeignId('klant_id')->nulllable()->constrained();
-            $table->datetime('datum')->nullable();
+            $table->datetime('date')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

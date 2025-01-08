@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('ingredient', function (Blueprint $table) {
             $table->id();
             $table->ForeignId('ingredient_id')->nullable()->constrainded();
-            $table->string('naam')->nullable();
-            $table->decimal('prijs')->nullable();
+            $table->string('name')->nullable();
+            $table->decimal('price')->nullable();
             $table->timestamps();
         });
     }
