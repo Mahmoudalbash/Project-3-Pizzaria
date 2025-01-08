@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('pizza', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('klant_id');
+            $table->ForeignId('pizza_id')->nulable()->constrained();
+            $table->string('naam')->nullable();
             $table->timestamps();
         });
     }
