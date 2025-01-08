@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pizza', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('klant_id');
             $table->timestamps();
         });
     }
