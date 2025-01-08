@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('pizza_ingredient', function (Blueprint $table) {
             $table->id();
+            $table->ForeignId('pizza_id')->nulllable()->constrained();
+            $table->ForeignId('ingredient_id')->nulllable()->constrained();
             $table->timestamps();
         });
     }
