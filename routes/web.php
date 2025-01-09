@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PizzaController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,9 @@ Route::middleware('auth')->group(function () {
 });
 require __DIR__.'/auth.php';
 
+//home
+Route::get('/home', [HomeController::class, 'index' ])->name('home.index');
 
+//menu
+Route::get('pizzas/menu', [PizzaController::class, 'index'])->name('pizzas.menu');
 
-Route::get('pizzas/menu', [PizzaController::class, 'index']);
