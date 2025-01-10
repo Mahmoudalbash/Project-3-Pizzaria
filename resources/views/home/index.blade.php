@@ -17,7 +17,7 @@
     <nav class="space-x-6">
         <a href="{{route('home.index')}}" class="hover:underline hover:text-gray-200">Home</a>
         <a href="{{route('pizzas.menu')}}" class="hover:underline hover:text-gray-200">Menu</a>
-        <a href="/contact" class="hover:underline hover:text-gray-200">Contact</a>
+        <a href="{{route('contact.index')}}" class="hover:underline hover:text-gray-200">Contact</a>
         <a href="/winkelmand" class="hover:underline hover:text-gray-200">Winkelmand</a>
     </nav>
 </header>

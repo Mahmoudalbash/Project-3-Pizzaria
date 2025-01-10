@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PizzaController;
@@ -26,3 +27,4 @@ Route::get('/home', [HomeController::class, 'index' ])->name('home.index');
 //menu
 Route::get('pizzas/menu', [PizzaController::class, 'index'])->name('pizzas.menu');
 
+route::get('contact', [ContactController::class, 'index'])->name('contact.index');
