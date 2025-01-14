@@ -2,75 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\ingredient;
 use App\Models\Pizza;
+use Illuminate\Http\Request;
 
 class PizzaController extends Controller
 {
     public function index()
     {
-
         $pizzas = Pizza::all();
 
-
-        return view('pizzas/index', compact('pizzas'));
+        return view('pizzas.index', compact('pizzas'));
     }
+
+    public function show($id)
+    {
+
+    }
+
     public function create()
     {
-        return view('pizzas.create');
+
     }
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        $validateData= $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
-            'image' =>'required|image|mimes:jpeg,png,jpg|max:2048',
-            'price' =>'required',
 
 
-        ]);
-
-        Pizza::create($validateData);
-
-        return redirect()->route('pizzas.index');
     }
 
-    public function show(string $index)
+    public function edit($id)
     {
-        $pizza = Pizza::findOrFail($index);
-
-        return view('pizzas.show', ['pizza' => $pizza, "id" => $index]);
-
-
     }
 
-    public function edit(Pizza $pizza)
+    public function update(Request $request, $id)
     {
-        return view('pizzas.edit',['pizza' => $pizza]);
     }
 
-    public function update(Request $request, Pizza $pizza)
+    public function destroy($id)
     {
-
-        $validateData= $request->validate([
-            'name' => 'required|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'description' => 'required',
-            'price' => 'required',
-        ]);
-
-        $pizza->update($validateData);
-
-        return redirect()->route('pizzas.index');
     }
-    public function destroy(Pizza $pizza)
-    {
-        $pizza->delete();
-
-        return redirect()->route('pizzas.index');
-    }
-
 }

@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call([
             PizzaTableSeeder::class,
+            IngredientTableSeeder::class,
+            KlantTableSeeder::class,
         ]);
 
         User::factory()->create([
