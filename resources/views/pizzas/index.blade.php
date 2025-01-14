@@ -14,25 +14,24 @@
     </div>
     <nav class="space-x-6">
         <a href="{{route('home.index')}}" class="hover:underline hover:text-gray-200">Home</a>
-        <a href="{{route('pizzas.menu')}}" class="hover:underline hover:text-gray-200">Menu</a>
+        <a href="{{route('pizzas.index')}}" class="hover:underline hover:text-gray-200">Menu</a>
         <a href="{{route('contact.index')}}" class="hover:underline hover:text-gray-200">Contact</a>
         <a href="/winkelmand" class="hover:underline hover:text-gray-200">Winkelmand</a>
     </nav>
 </header>
 
 <main class="container mx-auto p-6">
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
         @foreach ($pizzas as $pizza)
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
                 <img src="/images/{{ $pizza->image }}" alt="{{ $pizza->name }}" class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h2 class="text-lg font-bold">{{ $pizza->name }}</h2>
-                    <div class="mt-2 flex justify-between items-center">
-                        <span class="text-gray-700 font-bold">€{{ $pizza->price }}</span>
-                        <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                            Bestel Nu
-                        </button>
-                    </div>
+                    <p class="mt-2 text-gray-700">€{{ $pizza->price }}</p>
+                    <a href="{{route('pizzas.create')}}"
+                       class="mt-4 inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                        Bestel Nu
+                    </a>
                 </div>
             </div>
         @endforeach
@@ -40,4 +39,3 @@
 </main>
 </body>
 </html>
-

@@ -22,9 +22,10 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 //home
-Route::get('/home', [HomeController::class, 'index' ])->name('home.index');
+Route::resource('/home', HomeController::class);
 
 //menu
-Route::get('pizzas/menu', [PizzaController::class, 'index'])->name('pizzas.menu');
+Route::resource('/pizzas', PizzaController::class);
 
-route::get('contact', [ContactController::class, 'index'])->name('contact.index');
+//contact
+route::resource('/contact', ContactController::class);
