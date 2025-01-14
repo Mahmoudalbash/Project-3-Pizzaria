@@ -11,18 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pizza', function (Blueprint $table) {
+        Schema::create('pizza_ingredient', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('image')->nullable();
-            $table->string('description')->nullable();
-            $table->decimal('price', 8, 2)->nullable();
+            $table->foreignId('pizza_id')->nullable()->constrained();
+            $table->foreignId('ingredient_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('pizza');
+        Schema::dropIfExists('pizza_ingredient');
     }
 };
