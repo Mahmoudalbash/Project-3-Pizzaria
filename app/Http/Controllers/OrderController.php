@@ -27,7 +27,7 @@ class OrderController extends Controller
         $pizzas = Pizza::all();
         $ingredients = ingredient::all();
 
-        return view('pizzas.create', compact('ingredients', 'pizzas'));
+        return view('order.create', compact('ingredients', 'pizzas'));
     }
 
     /**

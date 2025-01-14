@@ -22,6 +22,12 @@ Route::middleware('auth')->group(function () {
 });
 require __DIR__.'/auth.php';
 
+Route::middleware('auth')->group(function () {
+    Route::resource('/home', HomeController::class);
+    Route::resource('/pizzas', PizzaController::class);
+    route::resource('/contact', ContactController::class)->except(['index', 'show']);
+});
+
 //home
 Route::resource('/home', HomeController::class);
 
