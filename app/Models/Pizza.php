@@ -9,7 +9,7 @@ class Pizza extends Model
 {
     use HasFactory;
 
-    protected $table = 'pizza';
+    protected $table = 'pizzas';
 
     protected $fillable = [
         'name',
@@ -17,5 +17,5 @@ class Pizza extends Model
         'price',
     ];
 
-    
+
 }

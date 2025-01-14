@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ingredient;
 use App\Models\Pizza;
 use Illuminate\Http\Request;
 
@@ -16,15 +17,18 @@ class PizzaController extends Controller
 
     public function show($id)
     {
+
     }
 
     public function create()
     {
-        return view('pizzas.create');
+
     }
 
     public function store(Request $request)
     {
+
+
     }
 
     public function edit($id)

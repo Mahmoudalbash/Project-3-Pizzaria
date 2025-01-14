@@ -28,7 +28,7 @@
                 <div class="p-4">
                     <h2 class="text-lg font-bold">{{ $pizza->name }}</h2>
                     <p class="mt-2 text-gray-700">€{{ $pizza->price }}</p>
-                    <a href="{{route('pizzas.create')}}"
+                    <a href="{{route('order.create')}}"
                        class="mt-4 inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
                         Bestel Nu
                     </a>

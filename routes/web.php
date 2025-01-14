@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PizzaController;
 use Illuminate\Support\Facades\Route;
@@ -29,3 +30,6 @@ Route::resource('/pizzas', PizzaController::class);
 
 //contact
 route::resource('/contact', ContactController::class);
+
+//order
+route::resource('/order', OrderController::class);

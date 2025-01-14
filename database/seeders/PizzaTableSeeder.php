@@ -13,7 +13,7 @@ class PizzaTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('pizza')->insert([
+        DB::table('pizzas')->insert([
             [
                 'name' => 'Margherita',
                 'image' => 'margherita.jpg',
