@@ -70,7 +70,7 @@ class PizzaController extends Controller
     {
         $pizza->delete();
 
-        return redirect()->route('pizzas.index');
+        return redirect()->route('pizza.index');
     }
 
 }
