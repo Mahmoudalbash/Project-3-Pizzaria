@@ -35,7 +35,7 @@
             @csrf
             @method('DELETE')
             <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-500 transition-colors">
-                Delete Pizza
+                Delete Pizzas
             </button>
         </form>
     </div>
