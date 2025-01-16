@@ -19,13 +19,12 @@
         <a href="/winkelmand" class="hover:underline hover:text-gray-200">Winkelmand</a>
     </nav>
 </header>
-<a href="{{ route('pizzas.create') }}"
-   class="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600">
-    voeg nieuwe pizza toe
-</a>
-<main class="container mx-auto p-6">
-    <div class="grid grid-cols-2 gap-4">
-
+<div class="container mx-auto p-6">
+    <a href="{{ route('pizzas.create') }}"
+       class="inline-block mb-4 bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600">
+        Voeg nieuwe pizza toe
+    </a>
+    <main class="grid grid-cols-2 gap-4">
         @foreach ($pizzas as $pizza)
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
                 <img src="/images/{{ $pizza->image }}" alt="{{ $pizza->name }}" class="w-full h-48 object-cover">
@@ -39,16 +38,16 @@
                                class="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600">
                                 Bekijk Details
                             </a>
-                            <button class="bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600">
+                            <a href="{{route('order.show', $pizza->id)}}"
+                               class="bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600">
                                 Bestel Nu
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         @endforeach
-
-    </div>
-</main>
+    </main>
+</div>
 </body>
 </html>

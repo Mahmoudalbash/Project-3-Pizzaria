@@ -14,9 +14,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $pizza = Pizza::all();
+        $pizzas = Pizza::all();
 
-        return view('pizzas.index', compact('pizza'));
+        return view('pizzas.index', compact('pizzas'));
     }
 
     /**
@@ -24,10 +24,10 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $pizzas = Pizza::all();
+        $pizza = Pizza::all();
         $ingredients = ingredient::all();
 
-        return view('order.create', compact('ingredients', 'pizzas'));
+        return view('order.show', compact('ingredients', 'pizza'));
     }
 
     /**
@@ -42,7 +42,10 @@ class OrderController extends Controller
             'image' => 'required|image',
         ]);
 
+        $pizza = Pizza::find($validatedData['pizza_id']);
+        $selectedIngredients = ingredient::whereIn('id', $validatedData['ingredients'])->get();
 
+        return redirect()->route('home.index')->with('success', 'Je bestelling is geplaatst!');
     }
 
     /**
@@ -50,8 +53,11 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $pizza = Pizza::findOrFail($id);
+        $ingredients = Ingredient::all();
+        return view('order.show', compact('pizza', 'ingredients'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
