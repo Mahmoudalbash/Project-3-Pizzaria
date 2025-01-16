@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pizza Details - {{ $pizza->name }}</title>
-    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
 
 <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md relative">
     <!-- Kleine afbeelding linksboven -->
     <img src="/images/{{ $pizza->image }}" alt="{{ $pizza->name }}"
-         class="w-2 h-14 object-cover absolute top-4 left-4 ">
+         class="w-20 h-30 object-cover absolute top-4 left-4 ">
 
     <!-- Inhoud met marge om ruimte te maken voor de afbeelding -->
     <div class="pl-32">
