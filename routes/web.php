@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PizzaController;
 use Illuminate\Support\Facades\Route;
@@ -21,10 +22,15 @@ Route::middleware('auth')->group(function () {
 });
 require __DIR__.'/auth.php';
 
-//home
-Route::get('/home', [HomeController::class, 'index' ])->name('home.index');
+Route::middleware('auth')->group(function () {
+    Route::resource('/home', HomeController::class);
 
-//menu
+    route::resource('/contact', ContactController::class)->except(['index', 'show']);
+});
+
+//home
+Route::resource('/home', HomeController::class);
+
 Route::get('pizzas/index', [PizzaController::class, 'index'])->name('pizzas.index');
 Route::get('/pizzas/create', [PizzaController::class, 'create'])->name('pizzas.create');
 Route::post('/pizzas', [PizzaController::class, 'store'])->name('pizzas.store');
@@ -34,3 +40,9 @@ Route::put('/pizzas/{pizza}', [PizzaController::class, 'update'])->name('pizzas.
 Route::delete('/pizzas/{pizza}', [PizzaController::class, 'destroy'])->name('pizzas.destroy');
 
 route::get('contact', [ContactController::class, 'index'])->name('contact.index');
+
+//contact
+route::resource('/contact', ContactController::class);
+
+//order
+route::resource('/order', OrderController::class);

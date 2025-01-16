@@ -8,7 +8,6 @@
 </head>
 <body class="bg-gray-100 font-sans">
 
-<!-- Header -->
 <header class="bg-green-600 text-white p-4 flex justify-between items-center shadow-md">
     <div class="flex items-center">
         <img src="/images/image 4.png" alt="Stonkspizza Logo" class="h-16 w-auto mr-3">
@@ -16,13 +15,12 @@
     </div>
     <nav class="space-x-6">
         <a href="{{route('home.index')}}" class="hover:underline hover:text-gray-200">Home</a>
-        <a href="{{route('pizzas.menu')}}" class="hover:underline hover:text-gray-200">Menu</a>
+        <a href="{{route('pizzas.index')}}" class="hover:underline hover:text-gray-200">Menu</a>
         <a href="{{route('contact.index')}}" class="hover:underline hover:text-gray-200">Contact</a>
         <a href="/winkelmand" class="hover:underline hover:text-gray-200">Winkelmand</a>
     </nav>
 </header>
 
-<!-- Content -->
 <main class="p-6">
     <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Our Best Deals</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
