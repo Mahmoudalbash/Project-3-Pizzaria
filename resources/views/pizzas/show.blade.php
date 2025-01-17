@@ -29,7 +29,7 @@
         </div>
     </div>
 </div>
-
+@auth
     <div class="text-center mb-4 mt-4">
         <form action="{{ route('pizzas.destroy', $pizza->id) }}" method="POST">
             @csrf
@@ -46,6 +46,7 @@
             Edit Band
         </a>
 
+        @endauth
         <a href="{{ route('pizzas.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-500 transition-colors">
             Back to List
         </a>

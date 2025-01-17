@@ -52,6 +52,10 @@
                                         >
                                             Register
                                         </a>
+
+                                        <a href="{{ route('pizzas.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-500 transition-colors">
+                                            Back to Pizzaria
+                                        </a>
                                     @endif
                                 @endauth
                             </nav>

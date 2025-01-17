@@ -13,17 +13,20 @@
         <h1 class="text-2xl font-extrabold tracking-wide">Stonkspizza</h1>
     </div>
     <nav class="space-x-6">
+        <a href="{{ route('login') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-500 transition-colors">Log in voor Admin </a>
         <a href="{{route('home.index')}}" class="hover:underline hover:text-gray-200">Home</a>
         <a href="{{route('pizzas.index')}}" class="hover:underline hover:text-gray-200">Menu</a>
         <a href="{{route('contact.index')}}" class="hover:underline hover:text-gray-200">Contact</a>
         <a href="/winkelmand" class="hover:underline hover:text-gray-200">Winkelmand</a>
     </nav>
 </header>
+@auth
 <div class="container mx-auto p-6">
     <a href="{{ route('pizzas.create') }}"
        class="inline-block mb-4 bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600">
         Voeg nieuwe pizza toe
     </a>
+    @endauth
     <main class="grid grid-cols-2 gap-4">
         @foreach ($pizzas as $pizza)
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
