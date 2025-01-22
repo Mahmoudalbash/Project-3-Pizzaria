@@ -2,84 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\ingredient;
+use App\Models\Format;
+use App\Models\Ingredient;
 use App\Models\Pizza;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $pizzas = Pizza::all();
-
-        return view('pizzas.index', compact('pizzas'));
+        return view('pizzas.index', ['pizzas' => Pizza::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        $pizza = Pizza::all();
-        $ingredients = ingredient::all();
-
-        return view('order.show', compact('ingredients', 'pizza'));
+        return view('order.show', [
+            'pizza' => Pizza::all(),
+            'ingredients' => Ingredient::all(),
+            'formats' => Format::all(),
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'pizza_id' => 'nullable|integer',
-            'name' => 'required|max:255',
-            'price' => 'required|integer',
-            'image' => 'required|image',
+        $validated = $request->validate([
+            'pizza_id' => 'required|exists:pizzas,id',
+            'ingredients' => 'array',
+            'ingredients.*' => 'exists:ingredients,id',
+            'format_id' => 'required|exists:formats,id',
         ]);
 
-        $pizza = Pizza::find($validatedData['pizza_id']);
-        $selectedIngredients = ingredient::whereIn('id', $validatedData['ingredients'])->get();
+        $pizza = Pizza::findOrFail($validated['pizza_id']);
+        $format = Format::findOrFail($validated['format_id']);
+        $ingredients = Ingredient::whereIn('id', $validated['ingredients'] ?? [])->get();
 
-        return redirect()->route('home.index')->with('success', 'Je bestelling is geplaatst!');
+        $ingredientsTotal = $ingredients->sum('price');
+        $totalPrice = ($pizza->price + $ingredientsTotal) * $format->price;
+
+        // Voeg bestelling toe aan winkelmand via sessie
+        session()->push('cart', [
+            'pizza_id' => $pizza->id,
+            'format_id' => $format->id,
+            'ingredients' => $ingredients->pluck('id')->toArray(),
+            'total_price' => $totalPrice,
+        ]);
+
+        return redirect()->route('cart.show')->with('success', 'Bestelling toegevoegd aan winkelmand!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        $pizza = Pizza::findOrFail($id);
-        $ingredients = Ingredient::all();
-        return view('order.show', compact('pizza', 'ingredients'));
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('order.show', [
+            'pizza' => Pizza::findOrFail($id),
+            'ingredients' => Ingredient::all(),
+            'formats' => Format::all(),
+        ]);
     }
 }

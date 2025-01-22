@@ -6,13 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updatePrijs() {
         const basePrice = parseFloat(basePriceElement.value) || 0;
-
-        let selectedsize = sizeSelect.options[sizeSelect.selectedIndex];
-        console.log(selectedsize);
-        let dataset = selectedsize.dataset;
-        console.log(dataset);
-        let price = dataset.price;
-        console.log(price);
         const sizePrice = parseFloat(sizeSelect.options[sizeSelect.selectedIndex].dataset.price) || 1;
         let ingredientPrice = 0;
 

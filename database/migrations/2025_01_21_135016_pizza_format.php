@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('format', function (Blueprint $table) {
+        Schema::create('pizza_format', function (Blueprint $table) {
             $table->id();
-            $table->string('size');
-            $table->decimal('price', 3, 2)->nullable();
+           // $table->foreignId('pizza_id')->nullable()->constrained();
+            //$table->foreignId('format_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('format');
+        //
     }
 };
