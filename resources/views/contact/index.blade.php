@@ -14,6 +14,7 @@
         <h1 class="text-2xl font-extrabold tracking-wide">Stonkspizza</h1>
     </div>
     <nav class="space-x-6">
+        <a href="{{ route('login') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-500 transition-colors">Log in voor Admin </a>
         <a href="{{route('home.index')}}" class="hover:underline hover:text-gray-200">Home</a>
         <a href="{{route('pizzas.index')}}" class="hover:underline hover:text-gray-200">Menu</a>
         <a href="{{route('contact.index')}}" class="hover:underline hover:text-gray-200">Contact</a>
