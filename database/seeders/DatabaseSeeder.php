@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
             PizzaTableSeeder::class,
             IngredientTableSeeder::class,
             KlantTableSeeder::class,
-            EmployeesTableSeeder::class
         ]);
 
         User::factory()->create([

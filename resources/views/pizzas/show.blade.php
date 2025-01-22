@@ -9,11 +9,11 @@
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
 
 <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md relative">
-
+    <!-- Kleine afbeelding linksboven -->
     <img src="/images/{{ $pizza->image }}" alt="{{ $pizza->name }}"
          class="w-20 h-30 object-cover absolute top-4 left-4 ">
 
-
+    <!-- Inhoud met marge om ruimte te maken voor de afbeelding -->
     <div class="pl-32">
         <h1 class="text-3xl font-bold text-green-600 mb-2">{{ $pizza->name }}</h1>
 
@@ -30,20 +30,26 @@
     </div>
 </div>
 @auth
-<form action="{{ route('pizzas.destroy', $pizza->id) }}" method="POST">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-500 transition-colors">
-        Delete Pizza
-    </button>
-</form>
-
-<a href="{{ route('pizzas.edit', ['pizza' => $pizza->id]) }}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-500 transition-colors">
-    Edit Pizza
-</a>
-@endauth
+    <div class="text-center mb-4 mt-4">
+        <form action="{{ route('pizzas.destroy', $pizza->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-500 transition-colors">
+                Delete Pizzas
+            </button>
+        </form>
+    </div>
 
 
+    <div class="flex justify-between mt-4">
+        <a href="{{ route('pizzas.edit', ['pizza' => $pizza->id]) }}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-500 transition-colors">
+            Edit Band
+        </a>
+
+        @endauth
+        <a href="{{ route('pizzas.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-500 transition-colors">
+            Back to List
+        </a>
     </div>
     </div>
 </body>

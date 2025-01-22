@@ -5,7 +5,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PizzaController;
-use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -55,6 +54,3 @@ route::resource('/contact', ContactController::class);
 
 //order
 route::resource('/order', OrderController::class);
-
-//employee
-route::resource('/employees', EmployeeController::class);
