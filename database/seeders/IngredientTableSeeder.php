@@ -45,6 +45,30 @@ class IngredientTableSeeder extends Seeder
                 'name' => 'pork chop',
                 'price' => 00.50,
             ],
+            [
+                'name' => 'sausage',
+                'price' => 00.70,
+            ],
+            [
+                'name' => 'peppers',
+                'price' => 00.60,
+            ],
+            [
+                'name' => 'black olives',
+                'price' => 00.70,
+            ],
+            [
+                'name' => 'spinach',
+                'price' => 00.40,
+            ],
+            [
+                'name' => 'eggplant',
+                'price' => 00.50,
+            ],
+            [
+                'name' => 'garlic',
+                'price' => 00.20,
+            ],
         ]);
     }
 }

@@ -9,50 +9,41 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-
-    public function store(Request $request)
-    {
-        $cart = session()->get('cart', []);
-
-        $pizzaId = $request->input('pizza_id');
-        $formatId = $request->input('format_id');
-        $ingredients = $request->input('ingredients', []);
-
-        $cart[] = [
-            'pizza_id' => $pizzaId,
-            'format_id' => $formatId,
-            'ingredients' => $ingredients,
-        ];
-
-        session()->put('cart', $cart);
-
-        return redirect()->route('cart.index');
-    }
-
     public function index()
     {
         $cart = session()->get('cart', []);
-        $formats = Format::all();
-        $ingredients = ingredient::all();
-
-        foreach ($cart as &$item) {
-            $item['pizza'] = Pizza::find($item['pizza_id']);
-            $item['format'] = Format::find($item['format_id']);
-            $item['ingredients'] = Ingredient::whereIn('id', $item['ingredients'])->get();
-        }
-
-        return view('cart.index', compact('cart', 'formats', 'ingredients'));
+        return view('cart.index', compact('cart'));
     }
 
-    public function update(Request $request, $index)
+    public function store(Request $request)
     {
+        $validated = $request->validate([
+            'pizza_id' => 'required|exists:pizzas,id',
+            'ingredients' => 'array',
+            'ingredients.*' => 'exists:ingredients,id',
+            'format_id' => 'required|exists:formats,id',
+        ]);
+
+        $pizza = Pizza::findOrFail($validated['pizza_id']);
+        $format = Format::findOrFail($validated['format_id']);
+        $ingredients = Ingredient::whereIn('id', $validated['ingredients'] ?? [])->get();
+
+        $ingredientsTotal = $ingredients->sum('price');
+        $totalPrice = ($pizza->price + $ingredientsTotal) * $format->price;
+
         $cart = session()->get('cart', []);
-
-        $cart[$index]['format_id'] = $request->input('format_id');
-        $cart[$index]['ingredients'] = $request->input('ingredients', []);
-
+        $cart[] = [
+            'pizza_id' => $pizza->id,
+            'pizza_name' => $pizza->name,
+            'format_id' => $format->id,
+            'format_size' => $format->size,
+            'ingredients' => $ingredients->pluck('id')->toArray(),
+            'ingredients_names' => $ingredients->pluck('name')->toArray(),
+            'total_price' => $totalPrice,
+            'quantity' => 1,
+        ];
         session()->put('cart', $cart);
 
-        return redirect()->route('cart.index')->with('success', 'Cart updated successfully!');
+        return redirect()->route('cart.index')->with('success', 'Pizza toegevoegd aan winkelmand!');
     }
 }

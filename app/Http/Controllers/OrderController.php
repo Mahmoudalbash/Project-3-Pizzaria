@@ -25,26 +25,31 @@ class OrderController extends Controller
         ]);
     }
 
-
     public function store(Request $request)
     {
         $validated = $request->validate([
             'pizza_id' => 'required|exists:pizzas,id',
             'ingredients' => 'array',
             'ingredients.*' => 'exists:ingredients,id',
-            'format_id' => 'required|exists:formats,id', // Validatie voor format_id
+            'format_id' => 'required|exists:formats,id',
         ]);
 
         $pizza = Pizza::findOrFail($validated['pizza_id']);
         $format = Format::findOrFail($validated['format_id']);
         $ingredients = Ingredient::whereIn('id', $validated['ingredients'] ?? [])->get();
 
+        // Bereken de totale prijs
         $ingredientsTotal = $ingredients->sum('price');
-        $totalPrice = ($pizza->base_price + $ingredientsTotal) * $format->price;
+        $sizeFactor = $format->size === 'small' ? 0.8 : ($format->size === 'medium' ? 1 : 1.2);
+        $totalPrice = ($pizza->price + $ingredientsTotal) * $sizeFactor;
 
-        return redirect()->route('cart.show')->with('success', 'Bestelling geplaatst! Totale prijs: €' . number_format($totalPrice, 2, ',', '.'));
+        // Verkrijg winkelmand uit sessie
+        $cart = session()->get('cart', []);
+
+        session()->put('cart', $cart);
+
+        return redirect()->route('cart.index')->with('success', 'Pizza toegevoegd aan winkelmand!');
     }
-
 
     public function show(string $id)
     {

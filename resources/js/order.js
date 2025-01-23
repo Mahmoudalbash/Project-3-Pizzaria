@@ -1,14 +1,17 @@
-document.addEventListener('DOMContentLoaded', function() {
+//laad het script in nadat de pagina is ingeladen
+document.addEventListener('DOMContentLoaded', function () {
     const basePriceElement = document.getElementById('base-price');
     const sizeSelect = document.getElementById('size');
     const ingredientInputs = document.querySelectorAll('.ingredient-input');
     const totalPriceElement = document.getElementById('total-price');
 
+    //functie om de prijs te berekenen van de pizza
     function updatePrijs() {
         const basePrice = parseFloat(basePriceElement.value) || 0;
         const sizePrice = parseFloat(sizeSelect.options[sizeSelect.selectedIndex].dataset.price) || 1;
         let ingredientPrice = 0;
 
+        //loop door de ingredienten en voeg de prijs toe aan de ingredientPrice
         ingredientInputs.forEach(input => {
             if (input.checked) {
                 ingredientPrice += parseFloat(input.dataset.price) || 0;
@@ -19,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         totalPriceElement.textContent = totalPrice.toFixed(2).replace('.', ',');
     }
 
+    //voeg eventlisteners toe aan de elementen
     sizeSelect.addEventListener('change', updatePrijs);
     ingredientInputs.forEach(input => input.addEventListener('change', updatePrijs));
 

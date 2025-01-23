@@ -21,14 +21,14 @@
         <a href="{{route('home.index')}}" class="hover:underline hover:text-gray-200">Home</a>
         <a href="{{route('pizzas.index')}}" class="hover:underline hover:text-gray-200">Menu</a>
         <a href="{{route('contact.index')}}" class="hover:underline hover:text-gray-200">Contact</a>
-        <a href="/winkelmand" class="hover:underline hover:text-gray-200">Winkelmand</a>
+        <a href="{{route('cart.index')}}" class="hover:underline hover:text-gray-200">Winkelmand</a>
     </nav>
 </header>
 
 <main class="container mx-auto py-8 px-4">
     <h2 class="text-2xl md:text-3xl font-semibold text-green-600 mb-6">Order Pizza</h2>
 
-    <form action="{{ route('order.store') }}" method="POST">
+    <form action="{{ route('cart.store') }}" method="POST">
         @csrf
         <div class="mb-4">
             <h3 class="text-xl font-semibold text-gray-700">Pizza: {{ $pizza->name }}</h3>
@@ -45,11 +45,6 @@
                     </option>
                 @endforeach
             </select>
-
-
-
-
-
         </div>
 
         <div class="mb-4">
@@ -57,7 +52,8 @@
             <div class="grid grid-cols-2 gap-2">
                 @foreach($ingredients as $ingredient)
                     <label class="inline-flex items-center">
-                        <input type="checkbox" name="ingredients[]" value="{{ $ingredient->id }}" class="ingredient-input"
+                        <input type="checkbox" name="ingredients[]" value="{{ $ingredient->id }}"
+                               class="ingredient-input"
                                data-price="{{ $ingredient->price }}"
                                aria-label="{{ $ingredient->name }} (€{{ number_format($ingredient->price, 2, ',', '.') }})">
                         <span class="ml-2">{{ $ingredient->name }} (€{{ number_format($ingredient->price, 2, ',', '.') }})</span>
@@ -67,22 +63,27 @@
             </div>
         </div>
 
-
-        <!-- Total Price Display -->
         <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2">Totale Prijs:</label>
             <p class="text-lg font-bold text-gray-700">€<span id="total-price">0.00</span></p>
         </div>
 
-        <!-- Submit Button -->
         <div class="mb-4">
-            <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition">
+            <button type="submit"
+                    class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition">
                 Bestelling Plaatsen
             </button>
         </div>
     </form>
+
+    <!-- Knop naar Menu -->
+    <div class="mt-4">
+        <a href="{{ route('pizzas.index') }}"
+           class="w-full block text-center bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded-lg transition">
+            Terug naar Menu
+        </a>
+    </div>
 </main>
 
 </body>
-
 </html>
