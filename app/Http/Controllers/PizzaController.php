@@ -10,26 +10,27 @@ class PizzaController extends Controller
     public function index()
     {
         $pizzas = Pizza::all();
-
-        return view('pizzas/index', compact('pizzas'));
+        return view('pizzas.index', compact('pizzas'));
     }
+
     public function create()
     {
         return view('pizzas.create');
     }
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        $validateData= $request->validate([
+        $validateData = $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
-            'image' =>'required|image|mimes:jpeg,png,jpg|max:2048',
-            'price' =>'required',
-
-
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'price' => 'required',
         ]);
+
+        // Afbeelding uploaden
+        if ($request->hasFile('image')) {
+            $validateData['image'] = $request->file('image')->store('images', 'public');
+        }
 
         Pizza::create($validateData);
 
@@ -39,36 +40,40 @@ class PizzaController extends Controller
     public function show(string $index)
     {
         $pizza = Pizza::findOrFail($index);
-
         return view('pizzas.show', ['pizza' => $pizza, "id" => $index]);
-
-
     }
 
     public function edit(Pizza $pizza)
     {
-        return view('pizzas.edit',['pizza' => $pizza]);
+        return view('pizzas.edit', ['pizza' => $pizza]);
     }
 
     public function update(Request $request, Pizza $pizza)
     {
-
-        $validateData= $request->validate([
+        $validateData = $request->validate([
             'name' => 'required|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'description' => 'required',
             'price' => 'required',
         ]);
 
+        // Afbeelding uploaden (indien aanwezig)
+        if ($request->hasFile('image')) {
+            $validateData['image'] = $request->file('image')->store('images', 'public');
+        } else {
+            // Behoud de oude afbeelding als er geen nieuwe wordt geüpload
+            $validateData['image'] = $pizza->image;
+        }
+
+        // Pizza bijwerken
         $pizza->update($validateData);
 
-        return redirect()->route('pizzas.index');
+        // Redirect naar de specifieke pizza na update, niet naar de index
+        return redirect()->route('pizzas.show', $pizza->id);
     }
+
     public function destroy(Pizza $pizza)
     {
         $pizza->delete();
-
-        return redirect()->route('pizza.index');
+        return redirect()->route('pizzas.index');
     }
-
 }
