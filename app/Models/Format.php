@@ -16,4 +16,10 @@ class Format extends Model
         'size',
         'price',
     ];
+
+    public function pizzas()
+    {
+        return $this->belongsToMany(Pizza::class, 'pizza_format');
+    }
+
 }
