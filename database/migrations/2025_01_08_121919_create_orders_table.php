@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->decimal('price')->nullable();
+            $table->string('name');
+            $table->string('address');
+            $table->string('phone');
+            $table->decimal('total_price', 8, 2);
+            $table->timestamps();
         });
     }
 
