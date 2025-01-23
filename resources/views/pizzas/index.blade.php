@@ -21,7 +21,8 @@
     </nav>
 </header>
 @auth
-<div class="container mx-auto p-6">
+    <a href="{{ route('employees.index') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-500 transition-colors">Employees
+        <div class="container mx-auto p-6">
     <a href="{{ route('pizzas.create') }}"
        class="inline-block mb-4 bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600">
         Voeg nieuwe pizza toe
