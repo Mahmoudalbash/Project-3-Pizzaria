@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             IngredientTableSeeder::class,
             KlantTableSeeder::class,
             FormatTableSeeder::class,
+            OrdersTableSeeder::class,
+
         ]);
 
         User::factory()->create([
