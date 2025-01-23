@@ -46,4 +46,13 @@ class CartController extends Controller
 
         return redirect()->route('cart.index')->with('success', 'Pizza toegevoegd aan winkelmand!');
     }
+
+    public function destroy(int $index)
+    {
+        $cart = session()->get('cart', []);
+        unset($cart[$index]);
+        session()->put('cart', $cart);
+
+        return redirect()->route('cart.index')->with('success', 'Pizza verwijderd uit winkelmand!');
+    }
 }

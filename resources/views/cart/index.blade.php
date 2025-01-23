@@ -30,10 +30,11 @@
             <th class="py-2 px-4 border-b">Ingrediënten</th>
             <th class="py-2 px-4 border-b">Aantal</th>
             <th class="py-2 px-4 border-b">Prijs</th>
+            <th class="py-2 px-4 border-b">Acties</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($cart as $item)
+        @foreach($cart as $index => $item)
             <tr class="even:bg-gray-50">
                 <td class="py-3 px-4 border-b">{{ $item['pizza_name'] }}</td>
                 <td class="py-3 px-4 border-b">{{ $item['format_size'] }}</td>
@@ -44,6 +45,15 @@
                 </td>
                 <td class="py-3 px-4 border-b">{{ $item['quantity'] ?? 1 }}</td>
                 <td class="py-3 px-4 border-b">€{{ number_format($item['total_price'], 2, ',', '.') }}</td>
+                <td class="py-3 px-4 border-b">
+                    <form action="{{ route('cart.destroy', $index) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            Verwijderen
+                        </button>
+                    </form>
+                </td>
             </tr>
         @endforeach
         </tbody>

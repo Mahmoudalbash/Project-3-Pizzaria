@@ -43,7 +43,6 @@ class OrderController extends Controller
         $sizeFactor = $format->size === 'small' ? 0.8 : ($format->size === 'medium' ? 1 : 1.2);
         $totalPrice = ($pizza->price + $ingredientsTotal) * $sizeFactor;
 
-        // Verkrijg winkelmand uit sessie
         $cart = session()->get('cart', []);
 
         session()->put('cart', $cart);
