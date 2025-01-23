@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('pizza_format', function (Blueprint $table) {
             $table->id();
-           // $table->foreignId('pizza_id')->nullable()->constrained();
-            //$table->foreignId('format_id')->nullable()->constrained();
+            $table->foreignId('pizza_id')->nullable()->constrained();
+            $table->foreignId('format_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

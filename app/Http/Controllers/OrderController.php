@@ -11,17 +11,21 @@ class OrderController extends Controller
 {
     public function index()
     {
-        return view('pizzas.index', ['pizzas' => Pizza::all()]);
+        $pizzas = Pizza::all();
+        return view('pizzas.index', compact('pizzas'));
     }
 
     public function create()
     {
+        $formats = Format::all();
         return view('order.show', [
-            'pizza' => Pizza::all(),
+            'pizzas' => Pizza::all(),
             'ingredients' => Ingredient::all(),
-            'formats' => Format::all(),
+            'formats' => $formats,
         ]);
     }
+
+
 
     public function store(Request $request)
     {
@@ -39,23 +43,16 @@ class OrderController extends Controller
         $ingredientsTotal = $ingredients->sum('price');
         $totalPrice = ($pizza->price + $ingredientsTotal) * $format->price;
 
-        // Voeg bestelling toe aan winkelmand via sessie
-        session()->push('cart', [
-            'pizza_id' => $pizza->id,
-            'format_id' => $format->id,
-            'ingredients' => $ingredients->pluck('id')->toArray(),
-            'total_price' => $totalPrice,
-        ]);
-
         return redirect()->route('cart.show')->with('success', 'Bestelling toegevoegd aan winkelmand!');
     }
 
-    public function show(string $id)
+    public function show($id)
     {
-        return view('order.show', [
-            'pizza' => Pizza::findOrFail($id),
-            'ingredients' => Ingredient::all(),
-            'formats' => Format::all(),
-        ]);
+        $pizza = Pizza::findOrFail($id); // Eén specifieke pizza ophalen op basis van ID
+        $ingredients = Ingredient::all();
+        $formats = Format::all();
+
+        return view('order.show', compact('pizza', 'ingredients', 'formats'));
     }
+
 }

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('format', function (Blueprint $table) {
+        Schema::create('formats', function (Blueprint $table) {
             $table->id();
             $table->string('size');
             $table->decimal('price', 3, 2)->nullable();
