@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
@@ -58,3 +59,6 @@ route::resource('/order', OrderController::class);
 
 //cart
 route::resource('/cart', CartController::class);
+
+//checkout
+route::resource('/checkout', CheckoutController::class);
