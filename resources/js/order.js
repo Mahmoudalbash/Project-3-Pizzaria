@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         totalPriceElement.textContent = totalPrice.toFixed(2).replace('.', ',');
     }
 
-    //voeg eventlisteners toe aan de elementen
+    //kijkt of een van de ingredienten is aangevinkt of de size is veranderd
     sizeSelect.addEventListener('change', updatePrijs);
     ingredientInputs.forEach(input => input.addEventListener('change', updatePrijs));
 

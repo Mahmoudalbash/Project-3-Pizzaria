@@ -43,7 +43,7 @@
 
     <div class="flex justify-between mt-4">
         <a href="{{ route('pizzas.edit', ['pizza' => $pizza->id]) }}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-500 transition-colors">
-            Edit Band
+            Edit Pizza
         </a>
 
         @endauth

@@ -59,13 +59,15 @@
         </tbody>
     </table>
     <div class="mt-6">
+        <h3 class="text-xl font-semibold">Totaal Prijs: €{{ number_format($totalPrice, 2, ',', '.') }}</h3>
+    </div>
+    <div class="mt-6">
         <form action="{{ route('checkout.index') }}" method="GET">
             <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition">
                 Afrekenen
             </button>
         </form>
     </div>
-
 </main>
 </body>
 </html>
